@@ -2652,7 +2652,28 @@ class SVGLoader extends Loader {
 
 					outerPoint.copy( tempV2_5 ).add( currentPoint );
 					innerPoint.add( currentPoint );
+                    // ... کد قبلی ...
 
+// compute inner and outer segment intersections
+const miterSide = strokeWidth2 / dot;
+tempV2_3.multiplyScalar( - miterSide );
+tempV2_4.subVectors( currentPoint, previousPoint );
+tempV2_5.copy( tempV2_4 ).setLength( miterSide ).add( tempV2_3 );
+innerPoint.copy( tempV2_5 ).negate();
+outerPoint.copy( tempV2_5 ).add( currentPoint );
+innerPoint.add( currentPoint );
+
+// --- شروع کد اشکال‌زدایی ما ---
+console.log(`--- حلقه شماره ${iPoint} ---`);
+console.log('نقطه فعلی:', currentPoint);
+console.log('ضخامت خط / dot:', miterSide);
+console.log('نقطه داخلی:', innerPoint);
+console.log('نقطه بیرونی:', outerPoint);
+// --- پایان کد اشکال‌زدایی ما ---
+
+isMiter = false;
+
+// ... ادامه کد ...
 					isMiter = false;
 
 					if ( innerSideModified ) {
